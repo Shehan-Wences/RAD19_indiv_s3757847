@@ -8,7 +8,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 section {
@@ -56,8 +56,8 @@ p {
 
 /* header */
 
-.navbar-fixed-top {
-    top: 5px;
+.navbar{
+      margin-bottom: 10px;
 }
 
 #logo {
@@ -111,7 +111,12 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
+  background:#e4e4e4;
+  color: black;
+  p{
+    margin:0;
+    color:grey;
+  }
   a {
     color: $gray;
     &:hover {
