@@ -102,13 +102,19 @@ p {
 
     display: inline;
     padding:10px 10px 4px 10px;
-     &:hover {
+     &:hover,:focus {
 
-    background:transparent;
+    background-color:transparent;
 
   }
 
 }
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+     background-color: transparent;
+
+}
+
 /* footer */
 
 footer {
