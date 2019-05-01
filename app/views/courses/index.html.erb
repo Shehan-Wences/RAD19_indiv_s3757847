@@ -1,12 +1,20 @@
 
 
-<h1>All Courses</h1>
+ <h1> </h1>
 
 
 
 <div class="container">
-    <% @courses.each do |course| %>
-      <div class="row course-block" style="margin:18px 18px 0px 0px;padding:18px 18px 0px 0px;border-top: 1px solid lightgrey;">
+
+    <ul class="nav nav-tabs" style="line-height: 2.0;">
+    <li class="active"><a data-toggle="tab" href="#courses">Courses</a></li>
+    <li><a data-toggle="tab" href="#coordinators">Coordinators</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="courses" class="tab-pane fade in active">
+          <% @courses.each do |course| %>
+      <div class="row course-block" style="margin:18px 0px 18px 0px;padding:18px 0px 18px 0px;border-bottom: 1px solid lightgrey;">
         <div class="col-md-2">
 
           <div><%= gravatar_for_c course.user %></div>
@@ -26,6 +34,46 @@
         </div>
       </div>
     <% end %>
+
+    </div>
+    <div id="coordinators" class="tab-pane fade">
+
+     <% @users.each do |user| %>
+     <div class="row course-block" style="margin:18px 0px 18px 0px;padding:18px 0px 18px 0px;border-bottom: 1px solid lightgrey;">
+        <div class="col-md-12 col-centered">
+
+          <div><%= gravatar_for_c user %></div>
+          <h5 style="text-align: center;">Coordinator Name : <%= link_to user.name, user %></h5>
+
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 
