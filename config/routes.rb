@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'category/new'
+
   resources :courses
   get 'courses/new'
 

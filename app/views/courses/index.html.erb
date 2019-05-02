@@ -24,7 +24,7 @@
         <div class="col-md-6" style="background:lightgrey;padding:10px 10px 10px 20px;">
         <h4><%= link_to course.name, course %></h4>
         <p>Prerequisite : <%= course.prerequisite %></p>
-        <p>Category : <%= course.category %></p>
+        <p>Category : <%= course.category.name %></p>
         <p>Location : <%= course.location %></p>
         <p>Created <%= course.created_at%></p>
 

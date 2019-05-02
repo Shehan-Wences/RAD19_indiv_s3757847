@@ -31,19 +31,19 @@ class CoursesController < ApplicationController
 
   # POST /courses
   # POST /courses.json
-  def create
-    @course = current_user.courses.build(course_params)
-
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+#  def create
+#    @course = current_user.courses.build(course_params)
+#
+#    respond_to do |format|
+#      if @course.save
+#        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+#        format.json { render :show, status: :created, location: @course }
+#      else
+#        format.html { render :new }
+#        format.json { render json: @course.errors, status: :unprocessable_entity }
+#      end
+#    end
+#  end
 
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
@@ -76,7 +76,7 @@ class CoursesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def course_params
-      params.require(:course).permit(:name, :prerequisite, :category, :location)
-    end
+  #  def course_params
+   #   params.require(:course).permit(:name, :prerequisite, :category_id, :location)
+  #  end
 end
