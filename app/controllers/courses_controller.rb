@@ -5,8 +5,14 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
     @users = User.all
+    if params[:name]
+      val=Category.find_by(:name=>params[:name])
+      @courses=Course.where(:category_id=>val)
+    else
+    @courses = Course.all
+    end
+
   end
 
   def logged_in_user

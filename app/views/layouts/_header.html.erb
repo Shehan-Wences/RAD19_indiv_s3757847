@@ -10,9 +10,12 @@
               <i class="fa fa-crosshairs"></i> Category <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Web Development", '#'  %></li>
-              <li><%= link_to "Mobile Development", '#' %></li>
-              <li><%= link_to "Full Stack Dev", '#' %></li>
+              <li><%= link_to "Show All", courses_path %></li>
+              <% (Category.all).each do |cat| %>
+              <li><%= link_to cat.name, courses_path(:name=>cat.name)  %></li>
+              <% end %>
+
+
         </ul>
           </li>
 
