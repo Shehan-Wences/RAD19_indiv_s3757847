@@ -27,8 +27,8 @@
         <p>Category : <%= link_to course.category.name, courses_path(:name=>course.category.name) %> </p>
         <p>Location :
         <% course.locations.each do |location|  %>
-             <%= location.locationname %>
-          <% end %>
+            <%= link_to location.locationname, courses_path(:locationname=>location.locationname) %>
+        <% end %>
 
         <p>Created <%= course.created_at%></p>
 
