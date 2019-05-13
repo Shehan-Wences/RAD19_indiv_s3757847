@@ -25,7 +25,11 @@
         <h4><%= link_to course.name, course %></h4>
         <p>Prerequisite : <%= course.prerequisite %></p>
         <p>Category : <%= link_to course.category.name, courses_path(:name=>course.category.name) %> </p>
-        <p>Location : <%= course.location %></p>
+        <p>Location :
+        <% course.locations.each do |location|  %>
+             <%= location.locationname %>
+          <% end %>
+
         <p>Created <%= course.created_at%></p>
 
 

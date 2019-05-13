@@ -8,9 +8,12 @@ class CoursesController < ApplicationController
     @users = User.all
     if params[:name]
       val=Category.find_by(:name=>params[:name])
-      @courses=Course.where(:category_id=>val)
+      @courses=Course.where(:category_id=>val.id)
+    elsif params[:locationname]
+      val = Location.find_by(:locationname => params[:locationname])
+      @courses = Course.includes(:locations).where(locations: { id: val })
     else
-    @courses = Course.all
+     @courses = Course.all
     end
 
   end
