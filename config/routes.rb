@@ -18,10 +18,11 @@ Rails.application.routes.draw do
   post '/signup',  to: 'users#create'
   get  '/catcreate',  to: 'categories#new'
   post '/catcreate',  to: 'categories#create'
-   get  '/locationcreate',  to: 'locations#new'
+  get  '/locationcreate',  to: 'locations#new'
   post '/locationcreate',  to: 'locations#create'
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
+  get  '/login',   to: 'sessions#new'
+  post '/login',   to: 'sessions#create'
+  post '/createcourse',   to: 'courses#create'
   delete '/logout',  to: 'sessions#destroy'
 
   resources :users
