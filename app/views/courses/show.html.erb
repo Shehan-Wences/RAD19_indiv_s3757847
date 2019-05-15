@@ -16,8 +16,9 @@
 </p>
 
 <p>
-
+<strong>Description:</strong>
+  <%= @course.description %>
 </p>
-
+<%= image_tag @course.picture.url if @course.picture? %>
 <%#= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

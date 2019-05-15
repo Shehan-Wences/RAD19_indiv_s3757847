@@ -5,9 +5,9 @@
   <h2>
     This is the home page for the RAD Assignment.
   </h2>
-
+<% unless logged_in? %>
 <%= link_to '<div class="btn btn-lg btn-danger"><i class="fa fa-gear"></i> Sign up now</div>'.html_safe,  signup_path %>
-
+<% end %>
 </div>
 <div class="row">
   <div class="col-md-4">
@@ -15,12 +15,13 @@
     <p>Browse and view courses as a guest and sign up later</p>
     <%= link_to '<div class="btn btn-lg btn-success" style="font-size:15px;"><i class="fa fa-book"></i>  Browse all courses</div>'.html_safe,  courses_path %>
   </div>
+   <% unless logged_in? %>
   <div class="col-md-4">
     <h3>Sign in to your account</h3>
      <p>Update your courses, rate your courses,view coordinator information</p>
      <%= link_to '<div class="btn btn-lg btn-success" style="font-size:15px;"><i class="fa fa-address-card"></i>  Login to your account</div>'.html_safe,  login_path %>
   </div>
-
+ <% end %>
 
 
 </div>

@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
+      flash[:success] = "Welcome back to the Course App"
       redirect_to user
     else
       flash.now[:danger] = 'Invalid email/password combination'
@@ -14,6 +15,8 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    flash[:success] = "You are logged out!"
     redirect_to root_url
   end
+
 end

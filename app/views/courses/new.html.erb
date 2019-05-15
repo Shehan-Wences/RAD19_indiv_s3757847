@@ -12,6 +12,9 @@
       <%= f.label 'Prerequisite' %>
       <%= f.text_field :prerequisite, class: 'form-control' %>
 
+      <%= f.label 'Description' %>
+      <%= f.text_area(:description, size: '50x10', class: 'form-control') %>
+
       <%#= f.label 'Category' %>
       <%#= f.text_field :catname, class: 'form-control' %>
 
@@ -27,10 +30,23 @@
 
       <% end %>
 
-
       <br />
       <%= f.label 'Location' %>
-      <%= f.text_field :locationname, class: 'form-control' %>
+      <% (Location.all).each do |loc| %>
+
+      <div class="locations">
+      <%= f.radio_button :locationname, loc.locationname %> <%=loc.locationname%><br />
+      </div>
+
+
+      <% end %>
+
+      <br />
+      <span class="picture">
+        <%= f.file_field :picture %>
+      </span>
+      <%#= f.label 'Location' %>
+      <%#= f.text_field :locationname, class: 'form-control' %>
 
 
 

@@ -47,8 +47,6 @@ class CoursesController < ApplicationController
     cat=Category.find_by(:name=>params[:catname])
     loc=Location.find_by(:locationname=>params[:locationname])
 
-    #cat=Category.find(2)
-    #loc=Location.find(2)
 
     @course = current_user.courses.build(course_params)
     cat.courses << @course
@@ -97,6 +95,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.permit(:name, :prerequisite)
+      params.permit(:name, :prerequisite,:description,:picture)
     end
 end
