@@ -9,3 +9,31 @@
     </section>
   </aside>
 </div>
+
+<div class="row">
+   <% @courses.each do |course| %>
+      <div class="row course-block" style="margin:18px 0px 18px 0px;padding:18px 0px 18px 0px;border-bottom: 1px solid lightgrey;">
+        <div class="col-md-2">
+
+          <div><%= gravatar_for_c course.user %></div>
+          <h5 style="text-align: center;">Coordinator Name : <%= link_to course.user.name, course.user %></h5>
+
+        </div>
+        <div class="col-md-6" style="background:lightgrey;padding:10px 10px 10px 20px;">
+        <h4><%= link_to course.name, course %></h4>
+        <p>Prerequisite : <%= course.prerequisite %></p>
+        <p>Category : <%= link_to course.category.name, courses_path(:name=>course.category.name) %> </p>
+        <p>Location :
+        <% course.locations.each do |location|  %>
+            <%= link_to location.locationname, courses_path(:locationname=>location.locationname) %>
+        <% end %>
+
+        <p>Created <%= course.created_at%></p>
+
+
+        <td><%#= link_to 'Edit', edit_course_path(course) %></td>
+        <td><%#= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </div>
+      </div>
+    <% end %>
+</div>
