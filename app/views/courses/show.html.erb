@@ -1,24 +1,47 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
-
-<p>
-  <strong>Prerequisite:</strong>
+<div class="course-show">
+  <h1><%= @course.name %></h1>
+</div>
+<p style="margin-top:25px;">
+  <strong>Prerequisite:
   <%= @course.prerequisite %>
+  </strong>
 </p>
+<div class="row course-blockall" style="padding-top:0px;" >
+  <div class="col-md-8 course-block" >
+    <p>
+    <strong>Category:</strong>
+    <%= link_to  @course.category.name, courses_path(:name=> @course.category.name) %>
+  </p>
+  <p>
+    <strong>Location:</strong>
+    <% @course.locations.each do |location|  %>
+    <%= link_to location.locationname, courses_path(:locationname=>location.locationname) %>
+    <% end %>
+  </p>
+  <p>
+  <strong> Course Description:</strong>
+  </br>
 
-<p>
-  <strong>Category:</strong>
-  <%= @course.category %>
-</p>
-
-<p>
-<strong>Description:</strong>
   <%= @course.description %>
-</p>
-<%= image_tag @course.picture.url if @course.picture? %>
-<%#= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+ </p>
+
+  </div>
+  <div class="col-md-4">
+  <div><%= gravatar_for_c @course.user %></div>
+  <h5 style="text-align: center;">Brought to you by : <%= link_to @course.user.name, @course.user %></h5>
+
+  </div>
+</div>
+
+
+<%#= image_tag @course.picture.url if @course.picture? %>
+<% if logged_in? %>
+  <% if current_user.name == @course.user.name  %>
+<a class="btn btn-success" href="<%= edit_course_path(@course) %>" role="button">Edit this Course</a>
+  <% end %>
+<% end %>
+<a class="btn btn-primary" href="<%= courses_path %>" role="button">Return to Course List</a>
+
+

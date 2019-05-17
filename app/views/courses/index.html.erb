@@ -14,14 +14,14 @@
   <div class="tab-content">
     <div id="courses" class="tab-pane fade in active">
       <% @courses.each do |course| %>
-      <div class="row course-block" style="margin:18px 0px 18px 0px;padding:18px 0px 18px 0px;border-bottom: 1px solid lightgrey;">
+      <div class="row course-blockall" >
         <div class="col-md-2">
 
           <div><%= gravatar_for_c course.user %></div>
           <h5 style="text-align: center;">Coordinator Name : <%= link_to course.user.name, course.user %></h5>
 
         </div>
-        <div class="col-md-6" style="background:lightgrey;padding:10px 10px 10px 20px;">
+        <div class="col-md-6 course-block" >
         <h4><%= link_to course.name, course %></h4>
         <p>Prerequisite : <%= course.prerequisite %></p>
         <p>Category : <%= link_to course.category.name, courses_path(:name=>course.category.name) %> </p>

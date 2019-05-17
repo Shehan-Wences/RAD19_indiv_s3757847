@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :logged_in_user, only: [:new, :edit, :update, :destroy]
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-
+  before_action :correct_user, only: [:edit]
   # GET /courses
   # GET /courses.json
   def index
@@ -97,4 +97,13 @@ class CoursesController < ApplicationController
     def course_params
       params.permit(:name, :prerequisite,:description,:picture)
     end
+
+    def correct_user
+      @course = Course.find(params[:id])
+        unless @course.user == current_user
+          redirect_to( @course.user)
+          flash[:danger] = "Only the Coordinator who created can edit the course"
+        end
+    end
+
 end
