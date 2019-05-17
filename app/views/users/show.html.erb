@@ -1,32 +1,26 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-</div>
 
+</div>
+<div class="course-show">
+  <h1>Coordinator : <%= @user.name %></h1>
+
+</div>
+<div class="row">
+    <div class="col-md-12" style="padding: 20px;">
+
+        <%= gravatar_for_c @user %>
+
+
+  </div>
+  </div>
 <div class="row">
    <% @courses.each do |course| %>
-      <div class="row course-block" style="margin:18px 0px 18px 0px;padding:18px 0px 18px 0px;border-bottom: 1px solid lightgrey;">
-        <div class="col-md-2">
+      <div class="row course-blockall" >
 
-          <div><%= gravatar_for_c course.user %></div>
-          <h5 style="text-align: center;">Coordinator Name : <%= link_to course.user.name, course.user %></h5>
-
-        </div>
-        <div class="col-md-6" style="background:lightgrey;padding:10px 10px 10px 20px;">
+        <div class="col-md-8 col-md-offset-2 course-block">
         <h4><%= link_to course.name, course %></h4>
         <p>Prerequisite : <%= course.prerequisite %></p>
-        <p>Category : <%= link_to course.category.name, courses_path(:name=>course.category.name) %> </p>
-        <p>Location :
-        <% course.locations.each do |location|  %>
-            <%= link_to location.locationname, courses_path(:locationname=>location.locationname) %>
-        <% end %>
 
         <p>Created <%= course.created_at%></p>
 
