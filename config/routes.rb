@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'vote/create'
+
+  get 'vote/destroy'
+
   get 'locations/new'
 
   get 'categories/new'
@@ -23,7 +27,13 @@ Rails.application.routes.draw do
   get  '/login',   to: 'sessions#new'
   post '/login',   to: 'sessions#create'
   post '/createcourse',   to: 'courses#create'
+  post '/updatecourse',   to: 'courses#update'
   delete '/logout',  to: 'sessions#destroy'
 
   resources :users
+
+  resources :courses do
+  resources :votes, only: [:create, :destroy]
+  end
+
 end

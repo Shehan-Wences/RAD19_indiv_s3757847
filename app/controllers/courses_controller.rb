@@ -67,6 +67,16 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+
+    cat=Category.find_by(:name=>params[:catname])
+    loc=Location.find_by(:locationname=>params[:locationname])
+
+
+    @course = current_user.courses.build(course_params)
+    cat.courses << @course
+    @course.locations << loc
+
+
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }

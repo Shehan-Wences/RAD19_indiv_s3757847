@@ -3,31 +3,27 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 new-course">
-    <%= form_for('', url: createcourse_path) do |f| %>
+    <%= form_for('', url: updatecourse_path) do |f| %>
 
 
       <%= f.label 'Course Name' %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name,:value=>@course.name, class: 'form-control' %>
 
       <%= f.label 'Prerequisite' %>
-      <%= f.text_field :prerequisite, class: 'form-control' %>
+      <%= f.text_field :prerequisite,:value=>@course.prerequisite, class: 'form-control' %>
 
       <%= f.label 'Description' %>
-      <%= f.text_area(:description, size: '50x10', class: 'form-control') %>
+      <%= f.text_area(:description,:value=>@course.description, size: '50x10', class: 'form-control') %>
 
-      <%#= f.label 'Category' %>
-      <%#= f.text_field :catname, class: 'form-control' %>
+      <%= f.label 'Category' %>
+      <%= f.fields_for  @course.category do |form| %>
 
-
-      <%= f.label :Categories %><br />
-
-      <% (Category.all).each do |cat| %>
-
-      <div class="categories">
-      <%= f.radio_button :catname, cat.name %> <%=cat.name%><br />
-      </div>
-
-
+        <%#= form.radio_button :name,  @course.category.name %> <%#=@course.category.name%><br />
+          <% (Category.all).each do |a| %>
+          <div class="categories">
+          <%= form.radio_button :name, a.name ,:checked=>(@course.category.name.eql? a.name) %> <%=a.name%><br />
+          </div>
+        <% end %>
       <% end %>
 
       <br />
@@ -35,7 +31,7 @@
       <% (Location.all).each do |loc| %>
 
       <div class="locations">
-      <%= f.radio_button :locationname, loc.locationname %> <%=loc.locationname%><br />
+      <%= f.radio_button :locationname, loc.locationname,:checked=>true %> <%=loc.locationname%><br />
       </div>
 
 
@@ -43,7 +39,7 @@
 
       <br />
       <span class="picture">
-        <%= f.file_field :picture %>
+        <%= f.file_field :picture,:value => @course.picture.url if @course.picture? %>
       </span>
       <%#= f.label 'Location' %>
       <%#= f.text_field :locationname, class: 'form-control' %>
@@ -52,10 +48,11 @@
 
 
 
-      <%= f.submit "Edit my course", class: "btn btn-primary" %>
+      <%= f.submit "Update my course", class: "btn btn-success" %>
     <% end %>
   </div>
 </div>
-
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+<div class="row" style="padding: 18px;">
+<%= link_to 'Back to the Course', @course,class:"btn btn-success" %>
+<a class="btn btn-primary" href="<%= courses_path %>" role="button">Return to Course List</a>
+</div>
