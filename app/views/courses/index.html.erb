@@ -37,6 +37,16 @@
 
 
         <p><i class="fa fa-thumbs-up" style="margin-right: 3em;"></i><i class="fa fa-thumbs-down" style="margin-right: 3em;"></i></p>
+
+         <%= form_for course.votes.build, url: course_vote_index_path(course) do |f| %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.hidden_field :votetype, value: 1 %>
+              <%= f.submit 'Upvote', class: 'btn btn-default' %>
+            <% end %>
+        <%#= form_for('', url: createvote_path) do |f| %>
+            <%#= f.hidden_field :id, :value=> @course %>
+           <%#= f.submit "Upvote", class: "btn btn-success" %>
+        <%# end %>
         </div>
         <td><%#= link_to 'Edit', edit_course_path(course) %></td>
         <td><%#= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>

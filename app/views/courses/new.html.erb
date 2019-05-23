@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3 new-course">
     <%= form_for('', url: createcourse_path) do |f| %>
-      <%#= render 'shared/error_messages' %>
+      <%= render 'shared/courseerror_messages' %>
 
       <%= f.label 'Course Name' %>
       <%= f.text_field :name, class: 'form-control' %>

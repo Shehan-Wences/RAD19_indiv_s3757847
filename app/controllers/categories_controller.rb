@@ -1,12 +1,12 @@
 class CategoriesController < ApplicationController
   def new
-    @cat = Category.new
+    @category = Category.new
   end
 
 
   def create
-    @cat = Category.new(cat_params)
-    if @cat.save
+    @category = Category.new(category_params)
+    if @category.save
 
       flash[:success] = "Category Created!"
       redirect_back(fallback_location: catcreate_path)
@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
       render 'new'
     end
   end
-  def cat_params
+  def category_params
       params.require(:category).permit(:name)
   end
 end

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'category/new'
 
-  resources :courses
+
   get 'courses/new'
 
   get 'sessions/new'
@@ -30,10 +30,12 @@ Rails.application.routes.draw do
   post '/updatecourse',   to: 'courses#update'
   delete '/logout',  to: 'sessions#destroy'
 
-  resources :users
+
 
   resources :courses do
-  resources :votes, only: [:create, :destroy]
+  resources :vote, only: [:create, :destroy]
   end
+  resources :courses
+  resources :users
 
 end

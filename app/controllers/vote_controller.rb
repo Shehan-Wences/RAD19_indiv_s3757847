@@ -4,15 +4,18 @@ class VoteController < ApplicationController
     @vote.course = Course.find(params[:course_id])
     if @vote.save
       respond_to do |format|
-        format.html { redirect_to @vote.post }
-        format.js # we'll use this later for AJAX!
+	  	format.html { redirect_to :courses }
+	  	format.js
       end
+    else
+
     end
   end
 
+
   private
     def secure_params
-      params.require(:vote).permit(:user)
+      params.require(:vote).permit( :user_id, :votetype )
     end
 
 end
