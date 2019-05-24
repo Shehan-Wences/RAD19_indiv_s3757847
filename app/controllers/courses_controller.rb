@@ -2,8 +2,7 @@ class CoursesController < ApplicationController
   before_action :logged_in_user, only: [:new, :edit, :update, :destroy]
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit]
-  # GET /courses
-  # GET /courses.json
+
   def index
     @users = User.all
     if params[:name]
@@ -24,72 +23,45 @@ class CoursesController < ApplicationController
         redirect_to login_url
       end
   end
-  # GET /courses/1
-  # GET /courses/1.json
+
   def show
   end
 
-  # GET /courses/new
   def new
     @course = Course.new
     @category = Category.new
     @location = Location.new
   end
 
-  # GET /courses/1/edit
+
   def edit
     @course = Course.find(params[:id])
   end
 
-  # POST /courses
-  # POST /courses.json
   def create
 
-    cat=Category.find_by(:name=>params[:catname])
-    loc=Location.find_by(:locationname=>params[:locationname])
-
-
     @course = current_user.courses.build(course_params)
-    cat.courses << @course
-    @course.locations << loc
 
-   respond_to do |format|
       if @course.save
-       format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
+        flash[:success] = "Course Created"
+        redirect_to @course
       else
-        format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        render 'new'
       end
-    end
+
   end
 
-  # PATCH/PUT /courses/1
-  # PATCH/PUT /courses/1.json
   def update
 
-    cat=Category.find_by(:name=>params[:catname])
-    loc=Location.find_by(:locationname=>params[:locationname])
+   if @course.update_attributes(courseupdate_params)
+    flash[:success] = "Course updated"
+    redirect_to @course
+   else
+      render 'edit'
+   end
 
-
-    @course = current_user.courses.build(course_params)
-    cat.courses << @course
-    @course.locations << loc
-
-
-    respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
-      else
-        format.html { render :edit }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
-  # DELETE /courses/1
-  # DELETE /courses/1.json
   def destroy
     @course.destroy
     respond_to do |format|
@@ -99,14 +71,16 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_course
       @course = Course.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.permit(:name, :prerequisite,:description,:picture)
+      params.require(:course).permit(:name, :prerequisite,:description,:picture,:category_id,:location_ids => [])
+    end
+    def courseupdate_params
+      params.require(:course).permit(:name, :prerequisite,:description,:category_id,:location_ids => [])
     end
 
     def correct_user

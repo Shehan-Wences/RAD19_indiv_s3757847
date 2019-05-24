@@ -3,50 +3,43 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 new-course">
-    <%= form_for('', url: updatecourse_path) do |f| %>
+    <%= form_for(@course) do |f| %>
 
-
-      <%= f.label 'Course Name' %>
-      <%= f.text_field :name,:value=>@course.name, class: 'form-control' %>
+<%= f.label 'Course Name' %>
+      <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.label 'Prerequisite' %>
-      <%= f.text_field :prerequisite,:value=>@course.prerequisite, class: 'form-control' %>
+      <%= f.text_field :prerequisite, class: 'form-control' %>
 
       <%= f.label 'Description' %>
-      <%= f.text_area(:description,:value=>@course.description, size: '50x10', class: 'form-control') %>
+      <%= f.text_area(:description, size: '50x10', class: 'form-control') %>
 
-      <%= f.label 'Category' %>
-      <%= f.fields_for  @course.category do |form| %>
+      <%= f.label :Categories %><br />
 
-        <%#= form.radio_button :name,  @course.category.name %> <%#=@course.category.name%><br />
-          <% (Category.all).each do |a| %>
-          <div class="categories">
-          <%= form.radio_button :name, a.name ,:checked=>(@course.category.name.eql? a.name) %> <%=a.name%><br />
-          </div>
-        <% end %>
+      <%= f.fields_for @course.locations do |form| %>
+       <%#= form.label :account_number %><br>
+      <% end %>
+
+      <% (Category.all).each do |category| %>
+
+      <div class="categories">
+      <%= f.radio_button :category_id , category.id %><%=category.name%><br />
+      </div>
+
       <% end %>
 
       <br />
       <%= f.label 'Location' %>
-      <% (Location.all).each do |loc| %>
 
-      <div class="locations">
-      <%= f.radio_button :locationname, loc.locationname,:checked=>true %> <%=loc.locationname%><br />
-      </div>
+       <%= f.collection_check_boxes :location_ids, Location.all, :id, :locationname do |location| %>
+        <div class="locations">
+        <%= location.check_box %>
+        <%= location.label %>
 
-
-      <% end %>
+        </div>
+       <% end %>
 
       <br />
-      <span class="picture">
-        <%= f.file_field :picture,:value => @course.picture.url if @course.picture? %>
-      </span>
-      <%#= f.label 'Location' %>
-      <%#= f.text_field :locationname, class: 'form-control' %>
-
-
-
-
 
       <%= f.submit "Update my course", class: "btn btn-success" %>
     <% end %>

@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 new-course">
-    <%= form_for('', url: createcourse_path) do |f| %>
+    <%= form_for(@course, url: createcourse_path) do |f| %>
       <%= render 'shared/courseerror_messages' %>
 
       <%= f.label 'Course Name' %>
@@ -15,48 +15,38 @@
       <%= f.label 'Description' %>
       <%= f.text_area(:description, size: '50x10', class: 'form-control') %>
 
-      <%#= f.label 'Category' %>
-      <%#= f.text_field :catname, class: 'form-control' %>
-
-
       <%= f.label :Categories %><br />
 
-      <% (Category.all).each do |cat| %>
+      <%= f.fields_for @course.locations do |form| %>
+       <%#= form.label :account_number %><br>
+      <% end %>
+
+      <% (Category.all).each do |category| %>
 
       <div class="categories">
-      <%= f.radio_button :catname, cat.name %> <%=cat.name%><br />
+      <%= f.radio_button :category_id , category.id %><%=category.name%><br />
       </div>
-
 
       <% end %>
 
       <br />
       <%= f.label 'Location' %>
-      <% (Location.all).each do |loc| %>
 
-      <div class="locations">
-      <%= f.radio_button :locationname, loc.locationname %> <%=loc.locationname%><br />
-      </div>
+       <%= f.collection_check_boxes :location_ids, Location.all, :id, :locationname do |location| %>
+        <div class="locations">
+        <%= location.check_box %>
+        <%= location.label %>
 
-
-      <% end %>
+        </div>
+       <% end %>
 
       <br />
       <span class="picture">
         <%= f.file_field :picture %>
       </span>
-      <%#= f.label 'Location' %>
-      <%#= f.text_field :locationname, class: 'form-control' %>
-
-
-
-
 
       <%= f.submit "Create my course", class: "btn btn-primary" %>
+
     <% end %>
   </div>
 </div>
-
-<%#= render 'form', course: @course %>
-
-<%#= link_to 'Back', courses_path %>
