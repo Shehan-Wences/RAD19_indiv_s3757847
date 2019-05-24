@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
 
   resources :courses do
-  resources :vote, only: [:create, :destroy]
+  resources :vote, only: [:create, :update]
   end
   resources :courses
   resources :users

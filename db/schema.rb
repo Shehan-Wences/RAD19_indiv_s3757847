@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190523095355) do
+ActiveRecord::Schema.define(version: 20190524030741) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20190523095355) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.string "votetype"
+    t.integer "votetype"
     t.integer "course_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
