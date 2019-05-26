@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
 
       else
         redirect_to contact_path
-        flash[:success] = "Message did not send!"
+        flash[:danger] = "Message did not send! Check if valid email is entered"
       end
 
   end
