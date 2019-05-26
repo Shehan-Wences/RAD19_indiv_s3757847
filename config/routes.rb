@@ -6,18 +6,13 @@ Rails.application.routes.draw do
   get 'vote/destroy'
 
   get 'locations/new'
-
   get 'categories/new'
-
   get 'category/new'
-
-
   get 'courses/new'
-
   get 'sessions/new'
-
   root 'static_pages#home'
-  get  '/help',    to: 'static_pages#help'
+  get  '/contact',    to: 'static_pages#contact'
+  post  '/contact',    to: 'static_pages#create'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   get  '/catcreate',  to: 'categories#new'
