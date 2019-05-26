@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :new]
   def new
     @location = Location.new
   end
@@ -18,4 +19,11 @@ class LocationsController < ApplicationController
   def location_params
       params.require(:location).permit(:locationname)
   end
+  private
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Only Logged in Users can create Locations!"
+        redirect_to root_path
+      end
+    end
 end
